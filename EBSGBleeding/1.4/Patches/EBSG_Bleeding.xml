@@ -2,7 +2,7 @@
 <Patch>
     <Operation Class="VFECore.PatchOperationToggableSequence">
         <enabled>True</enabled>
-        <label>Superclotting uses archite not met(Requires restart):</label>
+        <label>Superclotting uses archite not met:</label>
         <operations>
             <li Class="PatchOperationConditional">
                 <xpath>Defs/GeneDef[defName="Superclotting"]/exclusionTags</xpath>
