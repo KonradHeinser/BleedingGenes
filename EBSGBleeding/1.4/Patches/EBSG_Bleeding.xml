@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
-    <Operation Class="PatchOperationConditional">
-        <xpath>Defs/GeneDef[defName="Superclotting"]/biostatArc</xpath>
-        <nomatch Class="PatchOperationAdd">
-            <xpath>Defs/GeneDef[defName="Superclotting"]</xpath>
-            <value><biostatArc>1</biostatArc></value>
-        </nomatch>
-    </Operation>
-
-    <Operation Class="PatchOperationConditional">
-        <xpath>Defs/GeneDef[defName="Superclotting"]/exclusionTags</xpath>
-        <nomatch Class="PatchOperationAdd">
-            <xpath>Defs/GeneDef[defName="Superclotting"]</xpath>
-            <value>
-                <exclusionTags>
-                    <li>Bleeding</li>
-                </exclusionTags>
-            </value>
-        </nomatch>
-        <match Class="PatchOperationConditional">
-            <xpath>Defs/GeneDef[defName="Superclotting"]/exclusionTags/li[text()="Bleeding"]</xpath>
-            <nomatch Class="PatchOperationAdd">
+    <Operation Class="VFECore.PatchOperationToggableSequence">
+        <enabled>True</enabled>
+        <label>Superclotting uses archite not met(Requires restart):</label>
+        <operations>
+            <li Class="PatchOperationConditional">
                 <xpath>Defs/GeneDef[defName="Superclotting"]/exclusionTags</xpath>
-                <value><li>Bleeding</li></value>
-            </nomatch>
-        </match>
+                <nomatch Class="PatchOperationAdd">
+                    <xpath>Defs/GeneDef[defName="Superclotting"]</xpath>
+                    <value>
+                        <exclusionTags>
+                            <li>Bleeding</li>
+                        </exclusionTags>
+                    </value>
+                </nomatch>
+                <match Class="PatchOperationConditional">
+                    <xpath>Defs/GeneDef[defName="Superclotting"]/exclusionTags/li[text()="Bleeding"]</xpath>
+                    <nomatch Class="PatchOperationAdd">
+                        <xpath>Defs/GeneDef[defName="Superclotting"]/exclusionTags</xpath>
+                        <value><li>Bleeding</li></value>
+                    </nomatch>
+                </match>
+            </li>
+
+            <li Class="PatchOperationConditional">
+                <xpath>Defs/GeneDef[defName="Superclotting"]/biostatArc</xpath>
+                <nomatch Class="PatchOperationAdd">
+                    <xpath>Defs/GeneDef[defName="Superclotting"]</xpath>
+                    <value><biostatArc>1</biostatArc></value>
+                </nomatch>
+            </li>
+
+            <li Class="PatchOperationReplace">
+                <xpath>Defs/GeneDef[defName="Superclotting"]/biostatMet</xpath>
+                <value><biostatMet>0</biostatMet></value>
+            </li>
+        </operations>
     </Operation>
 
     <Operation Class="PatchOperationConditional">
