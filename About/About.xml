@@ -24,6 +24,7 @@
     <li>Ludeon.RimWorld.Biotech</li>
     <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
     <li>vanillaracesexpanded.genie</li>
+    <li>EBSG.Framework</li>
   </loadAfter>
 
   <description>
